@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Invitación</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            min-height: 100vh;
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+        }
+        .container {
+            text-align: center;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .container img {
+            max-width: 100%;
+            height: auto;
+            max-width: 600px;
+        }
+        .buttons {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+        }
+        .buttons button,
+        .rsvp form button {
+            padding: 10px 20px;
+            background-color: white;
+            color: black;
+            border: 2px solid #ccc;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s, color 0.3s;
+            min-width: 200px; /* Ajusta este valor según sea necesario */
+        }
+        .buttons button:hover,
+        .rsvp form button:hover {
+            background-color: #007BFF;
+            color: white;
+        }
+        .rsvp h3 {
+            margin: 0;
+        }
+        .rsvp form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 0;
+        }
+        .form-group {
+            width: 100%;
+            max-width: 400px;
+        }
+        .form-group label {
+            display: block;
+            margin-top: 10px;
+            text-align: left;
+        }
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            margin-top: 5px;
+            padding: 10px;
+            width: 100%;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+        .form-group input,
+        .form-group select {
+            height: 40px;
+        }
+        .form-group textarea {
+            resize: none; /* Evita que el textarea se pueda cambiar de tamaño */
+        }
+        .section-content {
+            padding: 30px;
+        }
+        .confirmation {
+            background-color: #ededed;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <section>
+            <img src="img-1234.png" alt="Invitación">
+        </section>
+
+        <section class="section-content">
+            <div class="buttons">
+                <button onclick="window.open('https://www.google.com/maps?q=37.7749,-122.4194', '_blank')">Ver ubicación</button>
+                <button onclick="downloadImage()">Descargar Invitación</button>
+            </div>
+        </section>
+
+        <section class="section-content confirmation">
+            <div class="rsvp">
+                <h3>Confirmación de Asistencia</h3>
+                <form id="rsvpForm" onsubmit="submitForm(event)">
+                    <div class="form-group">
+                        <label for="asistencia">¿Asistirás?</label>
+                        <select id="asistencia" name="asistencia" required onchange="toggleInputs()">
+                            <option value="sí">Sí</option>
+                            <option value="no">No</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="nombre">Nombre</label>
+                        <input type="text" id="nombre" name="nombre" placeholder="Nombre" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="adultos">Invitados adultos</label>
+                        <select id="adultos" name="adultos" required>
+                            <option value="0">0</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                            <option value="7">7</option>
+                            <option value="8">8</option>
+                            <option value="9">9</option>
+                            <option value="10">10</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="ninos">Invitados niños</label>
+                        <select id="ninos" name="ninos" required>
+                            <option value="0">0</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                            <option value="7">7</option>
+                            <option value="8">8</option>
+                            <option value="9">9</option>
+                            <option value="10">10</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="comentarios">Comentarios</label>
+                        <textarea id="comentarios" name="comentarios" placeholder="Comentarios"></textarea>
+                    </div>
+                    <br>
+                    <button type="submit">Enviar</button>
+                </form>
+            </div>
+        </section>
+    </div>
+    <script>
+        function downloadImage() {
+            const link = document.createElement('a');
+            link.href = 'img-1234.png';
+            link.download = 'Invitación.png';
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        }
+
+        function toggleInputs() {
+            const asistencia = document.getElementById('asistencia').value;
+            const adultos = document.getElementById('adultos');
+            const ninos = document.getElementById('ninos');
+
+            if (asistencia === 'sí') {
+                adultos.disabled = false;
+                ninos.disabled = false;
+            } else {
+                adultos.value = '0';
+                ninos.value = '0';
+                adultos.disabled = true;
+                ninos.disabled = true;
+            }
+        }
+        
+        function submitForm(event) {
+            event.preventDefault(); // Evita el envío automático del formulario
+            const asistencia = document.getElementById('asistencia').value === 'sí';
+            const nombre = document.getElementById('nombre').value;
+            const adultos = document.getElementById('adultos').value;
+            const ninos = document.getElementById('ninos').value;
+            const comentarios = document.getElementById('comentarios').value;
+
+            const data = {
+                attendance: asistencia,
+                numberAdults: parseInt(adultos),
+                numberChildren: parseInt(ninos),
+                comments: comentarios
+            };
+
+            fetch('http://midominio.com/api/confirmation', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log('Success:', data);
+                alert('Confirmación enviada con éxito');
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+                alert('Hubo un error al enviar la confirmación');
+            });
+        }
+
+        // Inicializar el estado de los inputs al cargar la página
+        document.addEventListener('DOMContentLoaded', toggleInputs);
+    </script>
+</body>
+</html>
