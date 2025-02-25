@@ -238,12 +238,13 @@
 
             const data = {
                 attendance: asistencia,
+                name: nombre,
                 numberAdults: parseInt(adultos),
                 numberChildren: parseInt(ninos),
                 comments: comentarios
             };
 
-            fetch('http://midominio.com/api/confirmation', {
+            fetch('http://localhost:5136/confirmationAttendance', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
