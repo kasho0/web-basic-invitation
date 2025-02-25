@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Invitación</title>
     <style>
-        body {
+         body {
             display: flex;
             justify-content: center;
             align-items: center;
@@ -96,6 +96,23 @@
 
         /* Media Queries */
         @media (max-width: 600px) {
+            body {
+                padding: 0;
+            }
+            .container {
+                width: 100%;
+                padding: 0;
+                border-radius: 0;
+                box-shadow: none;
+            }
+            .container img {
+                width: 100%;
+                height: auto;
+                border-radius: 0;
+            }
+            .section-content {
+                padding: 15px;
+            }
             .buttons button,
             .rsvp form button {
                 min-width: 100%;
@@ -106,9 +123,12 @@
             }
         }
     </style>
+    </style>
 </head>
 <body>
+
     <div class="container">
+        
         <section>
             <img src="img-1234.png" alt="Invitación">
         </section>
